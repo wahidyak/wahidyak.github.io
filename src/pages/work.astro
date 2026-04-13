@@ -1,0 +1,76 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import { siteConfig } from "@/site.config";
+
+const meta = {
+	description: `Projects and repositories — ${siteConfig.author}.`,
+	title: "Work",
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-12">Selected work</h1>
+	<p class="text-muted mb-10 max-w-prose">
+		A mix of public repositories and project summaries. For the full timeline, see my{" "}
+		<a class="cactus-link font-semibold" href="/Abdul-Wahid-Yakubu-Resume.pdf" download>résumé (PDF)</a>.
+	</p>
+
+	<ul class="space-y-12" role="list">
+		<li class="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,200px)] sm:items-start">
+			<div>
+				<h2 class="title mb-2 text-lg">
+					<a class="cactus-link" href="https://github.com/wahidyak/html-css" rel="noreferrer" target="_blank"
+						>HTML &amp; CSS learning</a
+					>
+				</h2>
+				<p class="text-muted">
+					Foundational front-end exercises and patterns—structure, layout, and responsive markup.
+				</p>
+			</div>
+			<a class="block overflow-hidden rounded-lg border border-accent/20" href="https://github.com/wahidyak/html-css">
+				<img
+					alt=""
+					class="h-40 w-full object-cover transition-opacity hover:opacity-90"
+					loading="lazy"
+					src="/img/youtyy.JPG"
+				/>
+			</a>
+		</li>
+		<li class="grid gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,200px)] sm:items-start">
+			<div>
+				<h2 class="title mb-2 text-lg">
+					<a class="cactus-link" href="https://github.com/wahidyak/acme-website" rel="noreferrer" target="_blank"
+						>Acme marketing site</a
+					>
+				</h2>
+				<p class="text-muted">A multi-section marketing-style layout built with semantic HTML and CSS.</p>
+			</div>
+			<a
+				class="block overflow-hidden rounded-lg border border-accent/20"
+				href="https://github.com/wahidyak/acme-website"
+			>
+				<img
+					alt=""
+					class="h-40 w-full object-cover transition-opacity hover:opacity-90"
+					loading="lazy"
+					src="/img/acme.JPG"
+				/>
+			</a>
+		</li>
+		<li>
+			<h2 class="title mb-2 text-lg">GPS spoofing detection</h2>
+			<p class="text-muted">
+				1D CNN in TensorFlow/Keras with 5-fold cross-validation; benchmarked 15+ algorithms on 18k+ real and
+				synthetic GPS feature windows. Combined model reached 99.37% accuracy after addressing domain shift and
+				catastrophic forgetting.
+			</p>
+		</li>
+		<li>
+			<h2 class="title mb-2 text-lg">Digital forensics &amp; threat analysis</h2>
+			<p class="text-muted">
+				Investigations with Volatility, Autopsy, and Wireshark—memory, disk, and mobile artifacts—with timeline
+				correlation to isolate exploit vectors and support threat intelligence.
+			</p>
+		</li>
+	</ul>
+</PageLayout>

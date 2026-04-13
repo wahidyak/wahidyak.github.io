@@ -1,0 +1,47 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import { siteConfig } from "@/site.config";
+
+const meta = {
+	description: `Background, education, and experience — ${siteConfig.author}.`,
+	ogImage: "/img/yakubu.JPG",
+	title: "About",
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title mb-12">About</h1>
+	<div class="prose prose-sm prose-cactus max-w-none">
+		<p>
+			I am pursuing a <strong>Master of Engineering in Electrical and Computer Engineering</strong> at the{" "}
+			<strong>University of Victoria</strong> (Jan 2025–present). I hold a Bachelor of Computer Engineering
+			Technology (Networking Systems) with Honours from Universiti Kuala Lumpur (UniKL MIIT).
+		</p>
+		<p>
+			Professionally, I focus on <strong>container orchestration and workflow automation</strong> at the National
+			Research Council (NRC), including CI/CD for CANFAR, GPU-ready scientific environments, and infrastructure
+			used by international astronomy researchers. Previously, I was a <strong>data analyst</strong> at Nigerian
+			Breweries (Heineken), building performance dashboards and strengthening reporting accuracy, and a{" "}
+			<strong>software &amp; teaching assistant</strong> at KidoCode, teaching programming and improving
+			departmental websites.
+		</p>
+		<p>
+			Outside work and study, I have represented international students on campus, published and presented
+			research at ICDiTS 2022, and played university football—including a bronze medal at ISSC 2019.
+		</p>
+		<p>
+			<a class="cactus-link inline-block font-semibold" href="/Abdul-Wahid-Yakubu-Resume.pdf" download
+				>Download résumé (PDF)</a
+			>
+		</p>
+		<img
+			alt="On the pitch"
+			class="border-accent/20 mt-8 max-h-80 rounded-lg border object-cover shadow-md"
+			decoding="async"
+			height="267"
+			loading="lazy"
+			src="/img/footballyakubu.png"
+			width="200"
+		/>
+	</div>
+</PageLayout>
