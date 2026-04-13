@@ -1,3 +1,10 @@
+# Deploy Astro static output to GitHub Pages.
+#
+# REQUIRED repo setting: Settings → Pages → Build and deployment → Source:
+#   select "GitHub Actions" (NOT "Deploy from a branch").
+# If the source is a branch, GitHub runs Jekyll on your repository root and the
+# site will fail or look wrong — this project is built with Astro, not Jekyll.
+
 name: Deploy site to GitHub Pages
 
 on:
@@ -34,7 +41,7 @@ jobs:
         run: npm run build
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
