@@ -6,12 +6,45 @@ import "@/styles/global.css";
 
 type Props = SiteMeta;
 
-const { articleDate, description, ogImage, title } = Astro.props;
+const { articleDate, articleModifiedDate, description, ogImage, title } = Astro.props;
 
 const titleSeparator = "•";
 const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url).href;
+const socialImageAlt = `${title} social preview image`;
+const jsonLd = articleDate
+	? {
+			"@context": "https://schema.org",
+			"@type": "BlogPosting",
+			author: {
+				"@type": "Person",
+				name: siteConfig.author,
+			},
+			dateModified: articleModifiedDate ?? articleDate,
+			datePublished: articleDate,
+			description,
+			headline: title,
+			image: [socialImageURL],
+			mainEntityOfPage: canonicalURL,
+			publisher: {
+				"@type": "Person",
+				name: siteConfig.author,
+				url: siteConfig.url,
+			},
+		}
+	: {
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			author: {
+				"@type": "Person",
+				name: siteConfig.author,
+			},
+			description: siteConfig.description,
+			inLanguage: siteConfig.lang,
+			name: siteConfig.title,
+			url: siteConfig.url,
+		};
 ---
 
 <meta charset="utf-8" />
@@ -48,6 +81,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <meta content={siteConfig.title} property="og:site_name" />
 <meta content={siteConfig.ogLocale} property="og:locale" />
 <meta content={socialImageURL} property="og:image" />
+<meta content={socialImageAlt} property="og:image:alt" />
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
 {
@@ -55,6 +89,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 		<>
 			<meta content={siteConfig.author} property="article:author" />
 			<meta content={articleDate} property="article:published_time" />
+			{articleModifiedDate && <meta content={articleModifiedDate} property="article:modified_time" />}
 		</>
 	)
 }
@@ -65,6 +100,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 <meta content={title} property="twitter:title" />
 <meta content={description} property="twitter:description" />
 <meta content={socialImageURL} property="twitter:image" />
+<meta content={socialImageAlt} property="twitter:image:alt" />
 
 {/* Sitemap */}
 <link href="/sitemap-index.xml" rel="sitemap" />
@@ -84,3 +120,4 @@ const socialImageURL = new URL(ogImage ? ogImage : "/social-card.png", Astro.url
 }
 
 <meta content={Astro.generator} name="generator" />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

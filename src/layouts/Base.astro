@@ -12,13 +12,19 @@ interface Props {
 }
 
 const {
-	meta: { articleDate, description = siteConfig.description, ogImage, title },
+	meta: { articleDate, articleModifiedDate, description = siteConfig.description, ogImage, title },
 } = Astro.props;
 ---
 
 <html class="scroll-smooth" lang={siteConfig.lang}>
 	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+		<BaseHead
+			articleDate={articleDate}
+			articleModifiedDate={articleModifiedDate}
+			description={description}
+			ogImage={ogImage}
+			title={title}
+		/>
 		<ThemeProvider />
 	</head>
 	<body
@@ -35,17 +41,17 @@ const {
 				"prefetch": [
 					{
 						"where": {
-							"href_matches": "/*"
+							"selector_matches": "a[href^='/']:not([href$='.xml']):not([href*='/rss'])"
 						},
-						"eagerness": "immediate"
+						"eagerness": "moderate"
 					}
 				],
 				"prerender": [
 					{
 						"where": {
-							"href_matches": "/*"
+							"selector_matches": "a[href^='/posts/'],a[href^='/notes/'],a[href^='/work/'],a[href^='/about/']"
 						},
-						"eagerness": "moderate"
+						"eagerness": "conservative"
 					}
 				]
 			}

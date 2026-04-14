@@ -15,7 +15,7 @@ export async function getTagMeta(tag: string): Promise<CollectionEntry<"tag"> | 
 	return tagEntries[0];
 }
 
-/** groups posts by year (based on option siteConfig.sortPostsByUpdatedDate), using the year as the key
+/** groups posts by publish year, using the year as the key.
  *  Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so.
  */
 export function groupPostsByYear(posts: CollectionEntry<"post">[]) {

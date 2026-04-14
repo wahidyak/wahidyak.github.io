@@ -10,8 +10,9 @@
 		"build": "astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
-		"check": "astro check && biome check",
-		"lint": "biome check --write",
+		"check": "astro check && npm run lint",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
 		"format": "prettier -w . --cache"
 	},
 	"dependencies": {
@@ -57,12 +58,6 @@
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"reading-time": "^1.5.0",
 		"typescript": "6.0.2"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"],
-		"overrides": {
-			"sharp": "^0.34.5"
-		}
 	},
 	"overrides": {
 		"sharp": "^0.34.5",
