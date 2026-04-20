@@ -19,6 +19,24 @@ import { remarkGithubCard } from "./src/plugins/remark-github-card";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 
+if (process.env.GITHUB_ACTIONS === "true") {
+	// #region agent log
+	fetch("http://127.0.0.1:7597/ingest/c8210937-d01a-4552-b02d-4374535275f8", {
+		method: "POST",
+		headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "c6dc1b" },
+		body: JSON.stringify({
+			sessionId: "c6dc1b",
+			runId: `${process.env.GITHUB_RUN_ID ?? "unknown"}-${process.env.GITHUB_RUN_ATTEMPT ?? "0"}`,
+			hypothesisId: "H3",
+			location: "astro.config.ts:23",
+			message: "Astro config loaded in CI build",
+			data: { cwd: process.cwd(), ref: process.env.GITHUB_REF ?? "unknown" },
+			timestamp: Date.now(),
+		}),
+	}).catch(() => {});
+	// #endregion
+}
+
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,

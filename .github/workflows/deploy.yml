@@ -34,6 +34,14 @@ jobs:
           node-version: 22
           cache: npm
 
+      # #region agent log
+      - name: Debug log workflow start
+        run: >
+          node -e "fetch('http://127.0.0.1:7597/ingest/c8210937-d01a-4552-b02d-4374535275f8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c6dc1b'},body:JSON.stringify({sessionId:'c6dc1b',runId:process.env.RUN_ID,hypothesisId:'H2',location:'deploy.yml:38',message:'Deploy workflow started',data:{eventName:process.env.GITHUB_EVENT_NAME,ref:process.env.GITHUB_REF,actor:process.env.GITHUB_ACTOR},timestamp:Date.now()})}).catch(()=>{})"
+        env:
+          RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+      # #endregion
+
       - name: Install dependencies
         run: npm ci
 
@@ -42,6 +50,14 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # #region agent log
+      - name: Debug log build artifacts
+        run: >
+          node -e "const fs=require('node:fs');fetch('http://127.0.0.1:7597/ingest/c8210937-d01a-4552-b02d-4374535275f8',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'c6dc1b'},body:JSON.stringify({sessionId:'c6dc1b',runId:process.env.RUN_ID,hypothesisId:'H4',location:'deploy.yml:55',message:'Astro build completed and artifact check',data:{distExists:fs.existsSync('dist'),indexExists:fs.existsSync('dist/index.html')},timestamp:Date.now()})}).catch(()=>{})"
+        env:
+          RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+      # #endregion
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
