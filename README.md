@@ -64,6 +64,7 @@ The site is deployed with GitHub Actions to GitHub Pages:
 - Deploy workflow: `.github/workflows/deploy.yml`
 
 GitHub Pages must be configured to use **GitHub Actions** as the source.
+If set to **Deploy from a branch**, GitHub will try to run Jekyll and fail on Astro files.
 
 ## Notes
 
